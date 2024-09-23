@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>MultiBand</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="helper.js" defer></script>
+  <style>
+    td {
+      vertical-align: middle;
+      min-width: 220px;
+    }
+
+    audio {
+      height: 50px;
+      width: 20vw;
+      min-width: 70px;
+      max-width: 220px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <div class="text-center">
+      <h1>MultiBand</h1>
+      <h3>Multi-Task Song Generation with Personalized Prompt-Based Control</h3>
+      <!-- <p class="lead fw-bold">
+          |<a
+            href=""
+            class="btn border-white bg-white fw-bold"
+            >paper</a
+          >|
+        </p> -->
+      <!-- <p> -->
+      
+
+      <!-- </p> -->
+      <!-- <p class="fst-italic mb-0">
+          
+        </p> -->
+      <p><b>Anonymous Authors</b></p>
+    </div>
+    <p>
+      <b>Abstract.</b>
+      Song generation focuses on producing controllable high-quality songs based on various personalized prompts. 
+      However, existing methods struggle to generate high-quality vocals and accompaniments with effective style control and alignment. 
+      Additionally, they fall short in supporting various personalized tasks based on diverse prompts.
+      To address these challenges, we introduce MultiBand, the first multi-task song generation model for synthesizing high-quality, aligned songs with extensive control based on diverse personalized prompts. 
+      MultiBand comprises these primary modules: 
+      1) VocalBand, a decoupled model leveraging the flow-matching method for singing styles, pitches, and mel-spectrograms generation, allowing high-level control for fast and high-quality vocal generation; 
+      2) AccompBand, a flow-based transformer model, incorporates the Aligned Vocal Encoder, using contrastive learning for alignment, and Band-MOE, selecting suitable experts for enhanced quality and control. 
+      This model allows for generating controllable, high-quality accompaniments perfectly aligned with vocals; 
+      and 3) two generation models, LyricBand for lyrics and MelodyBand for melodies, contribute to the comprehensive multi-task song generation system, allowing for extensive control based on multiple personalized prompts.
+      Experimental results demonstrate that MultiBand performs better over baseline models across multiple tasks using objective and subjective metrics.
+      Audio samples are available at https://multiband.github.io.
+    </p>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h2 id="model-overview" style="text-align: center;">Overview</h2>
+    <div>
+      <p><br /></p>
+      <p style="text-align: center;">
+        <img src="figure/intro.png" width=70% class="img-fluid">
+      </p>
+      <p><br /></p>
+    </div>
+    <p>
+      In this paper, we introduce MultiBand, the first multi-task song generation model for synthesizing high-quality, aligned songs with extensive control based on diverse personalized prompts.
+      Based on the understanding that accompaniment complements vocal by providing complex harmonic and rhythmic structure for better expression, we propose VocalBand and AccompBand.
+      To achieve fast and high-quality vocal generation with high-level control, we design a decoupled model VocalBand that predicts singing styles, pitches, and mel-spectrograms based on the flow-matching model.
+      For the complex nature of music and high-quality accompaniment generation with control and alignment, we introduce the flow-based transformer model AccompBand.
+      For alignment with vocals, we propose the Aligned Vocal Encoder using contrastive learning, ensuring vocal embedding carries style, rhythm, and melody closely related to accompaniment.
+      We also design Band-MOE (Mixture of Experts), selecting suitable experts based on the time step, text prompts, and vocal embedding for enhanced quality and control. 
+      Additionally, we add two generation models, LyricBand for lyrics and MelodyBand for melodies, contributing to the comprehensive multi-task song generation system. 
+    </p>
+    <p>
+    Our experiments on a combination of open-source and web-crawled bilingual song datasets show MultiBand can generate high-quality songs based on various prompts, outperforming baseline models in multiple tasks, including melody and lyric generation, singing voice synthesis, music and song generation, and other related tasks.
+    </p>
+    <div>
+      <p><br /></p>
+      <p style="text-align: center;">
+        <img src="figure/arch.png" width=70% class="img-fluid">
+      </p>
+      <p><br /></p>
+    </div>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h2 id="tablecontents" style="text-align: left;">Table of Contents</h2>
+    <div>
+        <li><a href="#SG" class="btn border-white bg-white fw-bold">Song Generation</a></li>
+        <li><a href="#SGL" class="btn border-white bg-white fw-bold">Song Generation (w/o lyrics)</a></li>
+        <li><a href="#SGN" class="btn border-white bg-white fw-bold">Song Generation (w/o notes)</a></li>
+        <li><a href="#SGC" class="btn border-white bg-white fw-bold">Song Generation (w/o contents)</a></li>
+        <li><a href="#SGP" class="btn border-white bg-white fw-bold">Song Generation (w/o prompts)</a></li>
+        <li><a href="#SST" class="btn border-white bg-white fw-bold">Singing Style Transfer</a></li>
+        <li><a href="#MST" class="btn border-white bg-white fw-bold">Music Style Transfer</a></li>
+        <li><a href="#V2S" class="btn border-white bg-white fw-bold">Vocal-To-Song Generation</a></li>
+        <li><a href="#A2S" class="btn border-white bg-white fw-bold">Accompaniment-To-Song Generation</a></li>
+        <li><a href="#VG" class="btn border-white bg-white fw-bold">Vocal Generation</a></li>
+        <li><a href="#AG" class="btn border-white bg-white fw-bold">Accompaniment Generation</a></li>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3 id="tablecontents" style="text-align: left;">Song Generation<a id="SG" /></h3>
+    <p style="margin-top: 2em">
+      In this section, we present generated samples of song generation.
+      We input full lyrics, music scores, singing and music styles as text prompts to generate songs via VocalBand and AccompBand.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Lyrics</th>
+            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">Generated Vocal</th>
+            <th style="text-align: center">Generated Accompaniment</th>
+            <th style="text-align: center">Generated Song</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr height=100px>
+            <th style="text-align: center">0</th>
+            <td style="text-align: center">歌词</td>
+            <td style="text-align: center">风格</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3 id="tablecontents" style="text-align: left;">Song Generation (w/o lyrics)<a id="SGL" /></h3>
+    <p style="margin-top: 2em">
+      In this section, we present generated samples of song generation (w/o lyrics).
+      We input lyric prompts, music scores, singing and music styles as text prompts to generate songs via LyricBand, VocalBand, and AccompBand.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Lyric Prompts</th>
+            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">Generated Vocal</th>
+            <th style="text-align: center">Generated Accompaniment</th>
+            <th style="text-align: center">Generated Song</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr height=100px>
+            <th style="text-align: center">0</th>
+            <td style="text-align: center">歌词风格</td>
+            <td style="text-align: center">风格</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3 id="tablecontents" style="text-align: left;">Song Generation (w/o notes)<a id="SGN" /></h3>
+    <p style="margin-top: 2em">
+      In this section, we present generated samples of song generation (w/o notes).
+      We input full lyrics, melody prompts, singing and music styles as text prompts to generate songs via MelodyBand, VocalBand, and AccompBand.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Lyrics</th>
+            <th style="text-align: center">Melody Prompts</th>
+            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">Generated Vocal</th>
+            <th style="text-align: center">Generated Accompaniment</th>
+            <th style="text-align: center">Generated Song</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr height=100px>
+            <th style="text-align: center">0</th>
+            <td style="text-align: center">歌词</td>
+            <td style="text-align: center">melody</td>
+            <td style="text-align: center">风格</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3 id="tablecontents" style="text-align: left;">Song Generation (w/o contents) <a id="SGC" /></h3>
+    <p style="margin-top: 2em">
+      In this section, we present generated samples of song generation (w/o contents).
+      We input lyric prompts, melody prompts, singing and music styles as text prompts to generate songs via LyricBand, MelodyBand, VocalBand, and AccompBand.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Lyric Prompts</th>
+            <th style="text-align: center">Melody Prompts</th>
+            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">Generated Vocal</th>
+            <th style="text-align: center">Generated Accompaniment</th>
+            <th style="text-align: center">Generated Song</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr height=100px>
+            <th style="text-align: center">0</th>
+            <td style="text-align: center">歌词</td>
+            <td style="text-align: center">melody</td>
+            <td style="text-align: center">风格</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3 id="tablecontents" style="text-align: left;">Song Generation (w/o prompts) <a id="SGP" /></h3>
+    <p style="margin-top: 2em">
+      In this section, we present generated samples of song generation (w/o contents).
+      We input lyric prompts, melody prompts, singing and music styles as text prompts to generate songs via LyricBand, MelodyBand, VocalBand, and AccompBand.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Lyric Prompts</th>
+            <th style="text-align: center">Melody Prompts</th>
+            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">Generated Vocal</th>
+            <th style="text-align: center">Generated Accompaniment</th>
+            <th style="text-align: center">Generated Song</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr height=100px>
+            <th style="text-align: center">0</th>
+            <td style="text-align: center">歌词</td>
+            <td style="text-align: center">melody</td>
+            <td style="text-align: center">风格</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3 id="tablecontents" style="text-align: left;">Singing Style Transfer<a id="SST" /></h3>
+    <p style="margin-top: 2em">
+      In this section, we present generated samples of singing style transfer.
+      We input full lyrics, music scores, singing and music styles as text prompts, and vocal prompt (for timbre, personalized styles) to generate songs via VocalBand and AccompBand.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Lyrics</th>
+            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">Vocal Prompt</th>
+            <th style="text-align: center">Generated Vocal</th>
+            <th style="text-align: center">Generated Song</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr height=100px>
+            <th style="text-align: center">0</th>
+            <td style="text-align: center">歌词</td>
+            <td style="text-align: center">风格</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3 id="tablecontents" style="text-align: left;">Music Style Transfer<a id="MST" /></h3>
+    <p style="margin-top: 2em">
+      In this section, we present generated samples of music style transfer.
+      We input full lyrics, music scores, singing styles as text prompts, and accompaniment prompt to generate songs via VocalBand and AccompBand.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Lyrics</th>
+            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">Accompaniment Prompt</th>
+            <th style="text-align: center">Generated Accompaniment</th>
+            <th style="text-align: center">Generated Song</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr height=100px>
+            <th style="text-align: center">0</th>
+            <td style="text-align: center">歌词</td>
+            <td style="text-align: center">风格</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3 id="tablecontents" style="text-align: left;">Vocal-To-Song Generation<a id="V2S" /></h3>
+    <p style="margin-top: 2em">
+      In this section, we present generated samples of vocal-to-song generation.
+      We input GT vocal, and music styles as text prompt to generate songs via AccompBand.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">GT Vocal</th>
+            <th style="text-align: center">Generated Accompaniment</th>
+            <th style="text-align: center">Generated Song</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr height=100px>
+            <th style="text-align: center">0</th>
+            <td style="text-align: center">风格</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3 id="tablecontents" style="text-align: left;">Accompaniment-To-Song Generation<a id="A2S" /></h3>
+    <p style="margin-top: 2em">
+      In this section, we present generated samples of accompaniment-to-song generation.
+      We input GT accompaniment, and lyrics, music scores, singing styles as text prompt to generate songs via VocalBand.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Lyrics</th>
+            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">GT Accompaniment</th>
+            <th style="text-align: center">Generated Vocal</th>
+            <th style="text-align: center">Generated Song</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr height=100px>
+            <th style="text-align: center">0</th>
+            <td style="text-align: center">歌词</td>
+            <td style="text-align: center">风格</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3 id="tablecontents" style="text-align: left;">Vocal Generation<a id="VG" /></h3>
+    <p style="margin-top: 2em">
+      In this section, we compare generated samples of vocal generation with baseline models.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Lyrics</th>
+            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">GT Vocal</th>
+            <th style="text-align: center">VISinger 2</th>
+            <th style="text-align: center">StyleSinger</th>
+            <th style="text-align: center">VocalBand</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr height=100px>
+            <th style="text-align: center">0</th>
+            <td style="text-align: center">歌词</td>
+            <td style="text-align: center">风格</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/VG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/VG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/VG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/VG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3 id="tablecontents" style="text-align: left;">Accompaniment Generation<a id="AG" /></h3>
+    <p style="margin-top: 2em">
+      In this section, we compare generated samples of accompaniment generation with baseline models.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">GT Accompaniment</th>
+            <th style="text-align: center">MusicGen</th>
+            <th style="text-align: center">LuminaT2Music</th>
+            <th style="text-align: center">AccompBand</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr height=100px>
+            <th style="text-align: center">0</th>
+            <td style="text-align: center">风格</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/AG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/AG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/AG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/AG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+</body>
+
+</html>
