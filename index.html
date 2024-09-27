@@ -86,7 +86,10 @@
       <p style="text-align: center;">
         <img src="figure/arch.png" width=70% class="img-fluid">
       </p>
-      <p><br /></p>
+
+      <p>
+      Note: For fair comparison, all samples are resampled to 48kHZ and normalized to -23dB LUFS.        
+      </p>
     </div>
     </div>
   </div>
@@ -95,16 +98,11 @@
     <h2 id="tablecontents" style="text-align: left;">Table of Contents</h2>
     <div>
         <li><a href="#SG" class="btn border-white bg-white fw-bold">Song Generation</a></li>
-        <li><a href="#SGL" class="btn border-white bg-white fw-bold">Song Generation (w/o lyrics)</a></li>
-        <li><a href="#SGN" class="btn border-white bg-white fw-bold">Song Generation (w/o notes)</a></li>
-        <li><a href="#SGC" class="btn border-white bg-white fw-bold">Song Generation (w/o contents)</a></li>
-        <li><a href="#SGP" class="btn border-white bg-white fw-bold">Song Generation (w/o prompts)</a></li>
         <li><a href="#SST" class="btn border-white bg-white fw-bold">Singing Style Transfer</a></li>
         <li><a href="#MST" class="btn border-white bg-white fw-bold">Music Style Transfer</a></li>
         <li><a href="#V2S" class="btn border-white bg-white fw-bold">Vocal-To-Song Generation</a></li>
         <li><a href="#A2S" class="btn border-white bg-white fw-bold">Accompaniment-To-Song Generation</a></li>
-        <li><a href="#VG" class="btn border-white bg-white fw-bold">Vocal Generation</a></li>
-        <li><a href="#AG" class="btn border-white bg-white fw-bold">Accompaniment Generation</a></li>
+        <li><a href="#AS" class="btn border-white bg-white fw-bold">Ablation Study</a></li>
     </div>
   </div>
 
@@ -118,170 +116,69 @@
       <table class="table table-hover" id="lowresource_table1">
         <thead>
           <tr>
-            <th style="text-align: center">ID</th>
             <th style="text-align: center">Lyrics</th>
-            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">Singing Styles</th>
+            <th style="text-align: center">Music Styles</th>
             <th style="text-align: center">Generated Vocal</th>
             <th style="text-align: center">Generated Accompaniment</th>
             <th style="text-align: center">Generated Song</th>
           </tr>
         </thead>
         <tbody>
+
           <tr height=100px>
-            <th style="text-align: center">0</th>
-            <td style="text-align: center">歌词</td>
-            <td style="text-align: center">风格</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center">如果今天我们就要分离，让我痛快的哭出声音</td>
+            <td style="text-align: center">The singing features a passionate male vocalist singing expressively, infusing the performance with deep emotion that complements the overall feel of the R&B piece. </td>
+            <td style="text-align: center">The music consists of shimmering hi-hats, energetic crash cymbals, a wide acoustic rhythm guitar melody, shimmering shakers, punchy snares, and a mellow bass. This arrangement creates a passionate and emotional vibe.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0002[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
           </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">不再看天上太阳透过云彩的光</td>
+            <td style="text-align: center">The singing showcases a female vocalist singing melodically in a falsetto style, delivering a light and airy performance that enhances the romantic essence of the music.</td>
+            <td style="text-align: center">The music features acousitc guitars playing the melody, supported by a bass guitar in the background, creating an easygoing atmosphere suitable for the opening theme of a teenage drama TV series.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0001[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0001[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">Now I know there's another world. Butterflies floating in the air. There is someone out there</td>
+            <td style="text-align: center">The pop singing features a female vocal that delivers an engaging performance, filled with expressive dynamics and an inviting tone that captivates listeners, evoking a sense of wonder and possibility. </td>
+            <td style="text-align: center">This music piece showcases a medium tempo with a catchy electric guitar riff, smooth bass line, steady drumming, keyboard harmony, and rhythmic acoustic guitar strumming. The music is soft, rich, full-bodied, emphatic, and pleasant, embodying a Western Classical style.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0008[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0008[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0008[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">I love you for a thousand more</td>
+            <td style="text-align: center">The singing features a female vocalist using breathy techniques while singing melodically in the lead, bringing an effortless charm and lightness to the performance, creating an easygoing atmosphere that resonates with listeners.</td>
+            <td style="text-align: center">The music is played by both acoustic and electric guitars, supported by a bass guitar in the background. The rhythm is provided by a basic acoustic drum beat, making it suitable for the opening theme of a teenage drama TV series.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0009[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0009[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0009[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
       </table>
     </div>
   </div>
-
-  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
-    <h3 id="tablecontents" style="text-align: left;">Song Generation (w/o lyrics)<a id="SGL" /></h3>
-    <p style="margin-top: 2em">
-      In this section, we present generated samples of song generation (w/o lyrics).
-      We input lyric prompts, music scores, singing and music styles as text prompts to generate songs via LyricBand, VocalBand, and AccompBand.
-    </p>
-    <div class="container pt-3 table-responsive">
-      <table class="table table-hover" id="lowresource_table1">
-        <thead>
-          <tr>
-            <th style="text-align: center">ID</th>
-            <th style="text-align: center">Lyric Prompts</th>
-            <th style="text-align: center">Style Prompts</th>
-            <th style="text-align: center">Generated Vocal</th>
-            <th style="text-align: center">Generated Accompaniment</th>
-            <th style="text-align: center">Generated Song</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr height=100px>
-            <th style="text-align: center">0</th>
-            <td style="text-align: center">歌词风格</td>
-            <td style="text-align: center">风格</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-          </tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
-    <h3 id="tablecontents" style="text-align: left;">Song Generation (w/o notes)<a id="SGN" /></h3>
-    <p style="margin-top: 2em">
-      In this section, we present generated samples of song generation (w/o notes).
-      We input full lyrics, melody prompts, singing and music styles as text prompts to generate songs via MelodyBand, VocalBand, and AccompBand.
-    </p>
-    <div class="container pt-3 table-responsive">
-      <table class="table table-hover" id="lowresource_table1">
-        <thead>
-          <tr>
-            <th style="text-align: center">ID</th>
-            <th style="text-align: center">Lyrics</th>
-            <th style="text-align: center">Melody Prompts</th>
-            <th style="text-align: center">Style Prompts</th>
-            <th style="text-align: center">Generated Vocal</th>
-            <th style="text-align: center">Generated Accompaniment</th>
-            <th style="text-align: center">Generated Song</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr height=100px>
-            <th style="text-align: center">0</th>
-            <td style="text-align: center">歌词</td>
-            <td style="text-align: center">melody</td>
-            <td style="text-align: center">风格</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-          </tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
-    <h3 id="tablecontents" style="text-align: left;">Song Generation (w/o contents) <a id="SGC" /></h3>
-    <p style="margin-top: 2em">
-      In this section, we present generated samples of song generation (w/o contents).
-      We input lyric prompts, melody prompts, singing and music styles as text prompts to generate songs via LyricBand, MelodyBand, VocalBand, and AccompBand.
-    </p>
-    <div class="container pt-3 table-responsive">
-      <table class="table table-hover" id="lowresource_table1">
-        <thead>
-          <tr>
-            <th style="text-align: center">ID</th>
-            <th style="text-align: center">Lyric Prompts</th>
-            <th style="text-align: center">Melody Prompts</th>
-            <th style="text-align: center">Style Prompts</th>
-            <th style="text-align: center">Generated Vocal</th>
-            <th style="text-align: center">Generated Accompaniment</th>
-            <th style="text-align: center">Generated Song</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr height=100px>
-            <th style="text-align: center">0</th>
-            <td style="text-align: center">歌词</td>
-            <td style="text-align: center">melody</td>
-            <td style="text-align: center">风格</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-          </tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
-    <h3 id="tablecontents" style="text-align: left;">Song Generation (w/o prompts) <a id="SGP" /></h3>
-    <p style="margin-top: 2em">
-      In this section, we present generated samples of song generation (w/o contents).
-      We input lyric prompts, melody prompts, singing and music styles as text prompts to generate songs via LyricBand, MelodyBand, VocalBand, and AccompBand.
-    </p>
-    <div class="container pt-3 table-responsive">
-      <table class="table table-hover" id="lowresource_table1">
-        <thead>
-          <tr>
-            <th style="text-align: center">ID</th>
-            <th style="text-align: center">Lyric Prompts</th>
-            <th style="text-align: center">Melody Prompts</th>
-            <th style="text-align: center">Style Prompts</th>
-            <th style="text-align: center">Generated Vocal</th>
-            <th style="text-align: center">Generated Accompaniment</th>
-            <th style="text-align: center">Generated Song</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr height=100px>
-            <th style="text-align: center">0</th>
-            <td style="text-align: center">歌词</td>
-            <td style="text-align: center">melody</td>
-            <td style="text-align: center">风格</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-          </tr>
-      </table>
-    </div>
-  </div>
-
+  
   <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
     <h3 id="tablecontents" style="text-align: left;">Singing Style Transfer<a id="SST" /></h3>
     <p style="margin-top: 2em">
       In this section, we present generated samples of singing style transfer.
-      We input full lyrics, music scores, singing and music styles as text prompts, and vocal prompt (for timbre, personalized styles) to generate songs via VocalBand and AccompBand.
+      We input full lyrics, music scores, singing and music styles as text prompts, and vocal prompts for timbre and personalized styles, to generate songs via VocalBand and AccompBand.
     </p>
     <div class="container pt-3 table-responsive">
       <table class="table table-hover" id="lowresource_table1">
         <thead>
           <tr>
-            <th style="text-align: center">ID</th>
             <th style="text-align: center">Lyrics</th>
-            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">Singing Styles</th>
+            <th style="text-align: center">Music Styles</th>
             <th style="text-align: center">Vocal Prompt</th>
             <th style="text-align: center">Generated Vocal</th>
             <th style="text-align: center">Generated Song</th>
@@ -289,13 +186,59 @@
         </thead>
         <tbody>
           <tr height=100px>
-            <th style="text-align: center">0</th>
-            <td style="text-align: center">歌词</td>
-            <td style="text-align: center">风格</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center">为什么就能那样简单,而又是为什么,人年少时</td>
+            <td style="text-align: center">The singing features a passionate female vocal. Her singing is emotional and addictive, showcasing techniques like vibrato to enhance the expression and draw the listener into the story. </td>
+            <td style="text-align: center">The music consists of wide acoustic guitar chords, a groovy bassline, and punchy kick and snare hits. It sounds addictive, vibrato, and emotional. </td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0001[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0001[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
           </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">我们都煎熬，我不要，流泪睡着</td>
+            <td style="text-align: center">The singing showcases a male vocalist delivering an affectionate performance in falsetto, skillfully navigating the melody with emotional nuances that resonate deeply with the listener, capturing the essence of heartache.</td>
+            <td style="text-align: center">The slow pop background music is characterized by an acoustic guitar and piano playing the main tune, accompanied by a bass guitar in the background. The rhythmic foundation consists of a slow tempo acoustic drum beat, creating an emotional atmosphere suitable for a romantic comedy soundtrack.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0003[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0003[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0003[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">让你别再担心,在没有你之前的日子曾经,也开心</td>
+            <td style="text-align: center">The singing features a passionate male vocal. His delivery is groovy and addictive, captivating the audience with its vibrant energy.</td>
+            <td style="text-align: center">This pop background music includes punchy kick and snare hits, shimmering hi-hats, a groovy bassline, and an electric guitar melody, creating a fun and emotional atmosphere.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0004[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0004[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0004[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">要知道伤心总是难免的,在每一个梦醒时分,有些事情你现在不必问,有些人你</td>
+            <td style="text-align: center">This pop singing piece features a female vocalist singing melodically in the lead, exuding charm and energy. Her performance creates an easygoing and danceable vibe that invites listener engagement.</td>
+            <td style="text-align: center">The background music consists of a keyboard playing the main tune, supported by a bass guitar, with an electronic drum beat providing the rhythm. This creates a soft, passionate, and mellow atmosphere, suitable for the opening theme of a teenage drama TV series.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0005[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0005[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0005[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">黑暗之中,沉默地探着你的手,是否我真的一无所有</td>
+            <td style="text-align: center">This pop singing piece features a male vocalist singing melodically in the lead, imbued with sentimentality and warmth. His performance enhances the nostalgic quality of the lyrics, inviting listeners to reflect on their own experiences.</td>
+            <td style="text-align: center">The music is played by the keyboard, supported by a bass guitar in the background, with a acoustic drum beat providing the rhythm. This arrangement makes it suitable for a romantic comedy soundtrack, particularly during scenes of nostalgia.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0007[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0007[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0007[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">都不搭</td>
+            <td style="text-align: center">The singing features a male vocalist singing melodically with vibrato in the lead, infusing the performance with emotional depth and dynamic expression that resonates with the listener, enhancing the overall mood of the singing.</td>
+            <td style="text-align: center">This indie rock background music includes a main tune played by the electric guitar, supported by a bass guitar in the background. The rhythm is driven by a simple acoustic drum beat, creating a groovy atmosphere suitable for a coffee shop soundtrack. </td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0002[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0002[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
       </table>
     </div>
   </div>
@@ -304,15 +247,13 @@
     <h3 id="tablecontents" style="text-align: left;">Music Style Transfer<a id="MST" /></h3>
     <p style="margin-top: 2em">
       In this section, we present generated samples of music style transfer.
-      We input full lyrics, music scores, singing styles as text prompts, and accompaniment prompt to generate songs via VocalBand and AccompBand.
+      We input full lyrics, music scores as text prompts, and accompaniment prompt with GT vocal to generate songs via AccompBand.
     </p>
     <div class="container pt-3 table-responsive">
       <table class="table table-hover" id="lowresource_table1">
         <thead>
           <tr>
-            <th style="text-align: center">ID</th>
-            <th style="text-align: center">Lyrics</th>
-            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">GT Vocal</th>
             <th style="text-align: center">Accompaniment Prompt</th>
             <th style="text-align: center">Generated Accompaniment</th>
             <th style="text-align: center">Generated Song</th>
@@ -320,12 +261,31 @@
         </thead>
         <tbody>
           <tr height=100px>
-            <th style="text-align: center">0</th>
-            <td style="text-align: center">歌词</td>
-            <td style="text-align: center">风格</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0001[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0001[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0001[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0002[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0002[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0003[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0003[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0003[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0003[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0004[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0004[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0004[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/MST/0004[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
           </tr>
       </table>
     </div>
@@ -341,8 +301,7 @@
       <table class="table table-hover" id="lowresource_table1">
         <thead>
           <tr>
-            <th style="text-align: center">ID</th>
-            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">Music Styles</th>
             <th style="text-align: center">GT Vocal</th>
             <th style="text-align: center">Generated Accompaniment</th>
             <th style="text-align: center">Generated Song</th>
@@ -350,11 +309,45 @@
         </thead>
         <tbody>
           <tr height=100px>
-            <th style="text-align: center">0</th>
-            <td style="text-align: center">风格</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center">The music features acoustic and electric guitars playing the melody, supported by a simple bass line. A slow tempo acoustic drum beat provides the rhythmic foundation, creating a cheerful atmosphere suitable for the opening theme of a teenage drama TV series.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0001[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0001[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">This music includes shimmering hi-hats, punchy kicks, a groovy bassline, and a synth lead melody, crafting an emotional and passionate sound. The arrangement breathes a happy and hopeful essence, enhancing the overall mood of the piece.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0002[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">The rock music features a wide electric guitar melody, groovy bass guitar, and punchy kick and snare hits, creating an addictive and passionate sound. This arrangement embodies an emotional aura.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0003[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0003[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0003[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">The pop music includes tinny bells, synth lead melodies, wooden percussion, shimmering hi-hats, and mellow piano chords. This combination produces a happy, joyful, and fun vibe, reminiscent of something you might hear in a club setting.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0004[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0004[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0004[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">The slow pop music is characterized by a male voice singing the main melody, accompanied by programmed percussion playing a simple beat and a synth playing a repetitive two-note phrase. This creates a romantic mood suitable for a romantic movie.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0005[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0005[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0005[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">The live music features punchy kick and snare hits, shimmering hi-hats, a groovy bassline, and a wide synth lead melody. This energetic arrangement combines addictive qualities, making it perfect for a vibrant pop song.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0006[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0006[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/V2S/0006[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
           </tr>
       </table>
     </div>
@@ -364,91 +357,218 @@
     <h3 id="tablecontents" style="text-align: left;">Accompaniment-To-Song Generation<a id="A2S" /></h3>
     <p style="margin-top: 2em">
       In this section, we present generated samples of accompaniment-to-song generation.
-      We input GT accompaniment, and lyrics, music scores, singing styles as text prompt to generate songs via VocalBand.
+      We input GT accompaniment, and lyrics, music scores, singing styles as text prompt, to generate songs via VocalBand.
     </p>
     <div class="container pt-3 table-responsive">
       <table class="table table-hover" id="lowresource_table1">
         <thead>
           <tr>
-            <th style="text-align: center">ID</th>
             <th style="text-align: center">Lyrics</th>
-            <th style="text-align: center">Style Prompts</th>
+            <th style="text-align: center">Singing Styles</th>
             <th style="text-align: center">GT Accompaniment</th>
             <th style="text-align: center">Generated Vocal</th>
             <th style="text-align: center">Generated Song</th>
           </tr>
         </thead>
         <tbody>
+
           <tr height=100px>
-            <th style="text-align: center">0</th>
-            <td style="text-align: center">歌词</td>
-            <td style="text-align: center">风格</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center">怎么能轻易说要结束</td>
+            <td style="text-align: center">This pop singing piece features a female vocalist utilizing a mixed voice technique, infusing her performance with deep emotion. Her expressive delivery and skillful vocal techniques create a sad atmosphere.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0002[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
           </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">看着他们我就湿了眼眶</td>
+            <td style="text-align: center">This nostalgic pop singing features a male vocalist whose poignant delivery evokes a deep sense of longing. His emotive singing style, rich in warmth and vulnerability, invites listeners to reflect on their own memories, creating a hauntingly beautiful atmosphere throughout the track.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0003[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0003[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0003[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">一直到彩虹出现那天</td>
+            <td style="text-align: center">This singing showcases a male vocalist whose gentle, slow singing creates a soothing atmosphere. His soft tones and deliberate phrasing evoke a sense of calm.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0004[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0004[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0004[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">如果还有遗憾，又怎么样呢，伤了痛了懂了</td>
+            <td style="text-align: center">This pop singing piece showcases a male vocalist employing a mixed voice technique, delivering an emotional performance that resonates with listeners. His use of dynamic expression and nuanced vocal techniques enhances the sentimental quality of the song, inviting reflection and personal connection through the warm and nostalgic lyrics.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0001[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0001[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
       </table>
     </div>
   </div>
 
   <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
-    <h3 id="tablecontents" style="text-align: left;">Vocal Generation<a id="VG" /></h3>
+    <h3 id="tablecontents" style="text-align: left;">Ablation Study<a id="SGL" /></h3>
     <p style="margin-top: 2em">
-      In this section, we compare generated samples of vocal generation with baseline models.
+      In this section, we present generated samples of ablation study on MultiBand.
+      We input different prompts to generate songs via LyricBand, VocalBand, and AccompBand.
+    </p>
+    
+    <p style="margin-top: 2em">
+      In this subsection, we present generated samples of song generation (w/o lyrics).
+      We input lyric prompts, music scores, singing and music styles as text prompts to generate songs via LyricBand, VocalBand, and AccompBand.
     </p>
     <div class="container pt-3 table-responsive">
       <table class="table table-hover" id="lowresource_table1">
         <thead>
           <tr>
-            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Lyric Prompts</th>
+            <th style="text-align: center">Singing Styles</th>
+            <th style="text-align: center">Music Styles</th>
+            <th style="text-align: center">Generated Lyrics</th>
+            <th style="text-align: center">Generated Vocal</th>
+            <th style="text-align: center">Generated Accompaniment</th>
+            <th style="text-align: center">Generated Song</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr height=100px>
+            <td style="text-align: center">Generate a Chinese lyric about autumn and longing, capturing a melancholic and reflective mood, with elements of wind, dreams, loneliness, and heartache.</td>
+            <td style="text-align: center">The recording showcases a female vocalist singing in a weak falsetto, delivering a sorrowful performance that evokes a sense of longing and emotional depth.</td>
+            <td style="text-align: center">The music features acoustic and electric guitars playing a melodic line, supported by a bass guitar in the background. A basic acoustic drum beat provides a steady rhythm, creating an easygoing atmosphere suitable for a lighthearted piece.</td>
+            <td style="text-align: center">风吹过，梦不见寂寞相伴，故秋声难负心伤</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/0001[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/0001[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">Generate a Chinese lyric about the warmth of the morning, expressing gentleness and hope, with themes of sunshine and love.</td>
+            <td style="text-align: center">The recording showcases a male vocalist singing in a weak falsetto, delivering a romantic performance that conveys tenderness and emotional warmth.</td>
+            <td style="text-align: center">The background features acoustic and electric guitars playing a melodic line, complemented by a bass guitar in the background. A basic acoustic drum beat sets a steady rhythm, creating a relaxed atmosphere suitable for a romantic piece.</td>
+            <td style="text-align: center">你用你的温柔，让我走向清晨</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/0002[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+
+    <p style="margin-top: 2em">
+      In this subsection, we present generated samples of song generation (w/o notes).
+      We input full lyrics, melody prompts, singing and music styles as text prompts to generate songs via MelodyBand, VocalBand, and AccompBand.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
             <th style="text-align: center">Lyrics</th>
-            <th style="text-align: center">Style Prompts</th>
-            <th style="text-align: center">GT Vocal</th>
-            <th style="text-align: center">VISinger 2</th>
-            <th style="text-align: center">StyleSinger</th>
-            <th style="text-align: center">VocalBand</th>
+            <th style="text-align: center">Melody Prompts</th>
+            <th style="text-align: center">Singing Styles</th>
+            <th style="text-align: center">Music Styles</th>
+            <th style="text-align: center">Generated Vocal</th>
+            <th style="text-align: center">Generated Accompaniment</th>
+            <th style="text-align: center">Generated Song</th>
           </tr>
         </thead>
         <tbody>
           <tr height=100px>
-            <th style="text-align: center">0</th>
-            <td style="text-align: center">歌词</td>
-            <td style="text-align: center">风格</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/VG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/VG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/VG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/VG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center">可惜从没人陪我演这剧本</td>
+            <td style="text-align: center">Please create a Chinese song for an alto singer, conveying a slightly sad emotion. The key should be A minor, and the BPM should be between 100 and 110.</td>
+            <td style="text-align: center">This pop singing features a female vocalist utilizing vibrato, delivering a heartfelt and sorrowful performance that deeply resonates with the listener's emotions.</td>
+            <td style="text-align: center">The background music combines melodic elements with a soft instrumental arrangement, creating a poignant atmosphere. The rhythmic foundation consists of gentle percussion and flowing harmonies, enhancing the overall feeling of sadness and longing, making it suitable for emotional moments in a narrative context.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/0001[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/0001[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">空着手，犹如你来的时候</td>
+            <td style="text-align: center">Please create a Chinese song for a high male singer with slightly happy emotion. The key should be F major, and the BPM should be between 130 and 150.</td>
+            <td style="text-align: center">This slow pop singing features a male vocalist delivering a smooth and romantic performance, skillfully navigating the sad melody, evoking feelings of sadness.</td>
+            <td style="text-align: center">The background music is characterized by a gentle arrangement, with arpeggiated guitar chords providing a lush texture, supported by simple percussion and bass playing the root notes. The minimalistic instrumentation creates a sad atmosphere.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/0002[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
           </tr>
       </table>
     </div>
-  </div>
 
-  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
-    <h3 id="tablecontents" style="text-align: left;">Accompaniment Generation<a id="AG" /></h3>
     <p style="margin-top: 2em">
-      In this section, we compare generated samples of accompaniment generation with baseline models.
+      In this subsection, we present generated samples of song generation (w/o contents).
+      We input lyric prompts, melody prompts, singing and music styles as text prompts to generate songs via LyricBand, MelodyBand, VocalBand, and AccompBand.
     </p>
     <div class="container pt-3 table-responsive">
       <table class="table table-hover" id="lowresource_table1">
         <thead>
           <tr>
-            <th style="text-align: center">ID</th>
-            <th style="text-align: center">Style Prompts</th>
-            <th style="text-align: center">GT Accompaniment</th>
-            <th style="text-align: center">MusicGen</th>
-            <th style="text-align: center">LuminaT2Music</th>
-            <th style="text-align: center">AccompBand</th>
+            <th style="text-align: center">Lyric Prompts</th>
+            <th style="text-align: center">Melody Prompts</th>
+            <th style="text-align: center">Singing Styles</th>
+            <th style="text-align: center">Music Styles</th>
+            <th style="text-align: center">Generated Lyrics</th>
+            <th style="text-align: center">Generated Vocal</th>
+            <th style="text-align: center">Generated Accompaniment</th>
+            <th style="text-align: center">Generated Song</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr height=100px>
+            <td style="text-align: center">Generate Chinese lyrics about lost dreams, conveying sadness and resignation, with themes of hope fading and introspection.</td>
+            <td style="text-align: center">Please compose a song for a tenor singer performing in mixed voice, set at a BPM of 130 and in the key of A Major.</td>
+            <td style="text-align: center">This singing features a male vocalist delivering a breathy and introspective performance, capturing a sense of despair and vulnerability through his nuanced delivery, which resonates deeply with the listener's emotions.</td>
+            <td style="text-align: center">The background music is defined by a rich synth pad melody, complemented by a strong bass sound that adds depth. The electronic drum beat provides a steady rhythm, creating an engaging and energetic atmosphere, making it suitable for dance clubs while conveying an underlying feeling of melancholy.</td>
+            <td style="text-align: center">梦里那眼睛，苍穹的星无数</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/0002[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">Generate Chinese lyrics about dreams and the cosmos, expressing wonder and awe, with themes of eyes, countless stars, and imagination.</td>
+            <td style="text-align: center">Please compose a melody based on the provided lyrics for a alto singer, conveying a sad mood. The BPM should be between 70 and 80, and the key should be A minor.</td>
+            <td style="text-align: center">This singing features a female vocalist using pharyngeal singing techniques, delivering a unique and textured performance that adds an intriguing layer of depth to the overall sound, enhancing its addictive quality.</td>
+            <td style="text-align: center">The background music is characterized by punchy kick and snare hits, shimmering hi-hats, and reversed crash cymbals, creating a dynamic rhythmic foundation. A groovy piano melody weaves through.</td>
+            <td style="text-align: center">梦想渐渐没了</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/0001[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGL/0001[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+      </table>
+    </div>
+
+    <p style="margin-top: 2em">
+      In this subsection, we present generated samples of song generation (w/o prompts).
+      We input lyric prompts, melody prompts, singing and music styles as text prompts to generate songs via LyricBand, MelodyBand, VocalBand, and AccompBand.
+    </p>
+    <div class="container pt-3 table-responsive">
+      <table class="table table-hover" id="lowresource_table1">
+        <thead>
+          <tr>
+            <th style="text-align: center">Generated Lyrics</th>
+            <th style="text-align: center">Generated Vocal</th>
+            <th style="text-align: center">Generated Accompaniment</th>
+            <th style="text-align: center">Generated Song</th>
           </tr>
         </thead>
         <tbody>
           <tr height=100px>
-            <th style="text-align: center">0</th>
-            <td style="text-align: center">风格</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/AG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/AG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/AG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/AG/.wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center">深夜里冷风，吹在我面上相逢</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/0001[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/0001[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
           </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">梦境今夜很长吧，幸好有我</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGP/0002[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
       </table>
     </div>
   </div>
