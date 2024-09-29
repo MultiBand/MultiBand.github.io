@@ -46,7 +46,17 @@
     </div>
     <p>
       <b>Abstract.</b>
-      Song generation focuses on producing controllable high-quality songs based on various personalized prompts. However, existing methods struggle to generate high-quality vocals and accompaniments with effective style control and proper alignment. Additionally, they fall short in supporting various personalized tasks based on diverse prompts. To address these challenges, we introduce MultiBand, the first multi-task song generation model for synthesizing high-quality, aligned songs with extensive control based on diverse personalized prompts. MultiBand comprises these primary models: 1) VocalBand, a decoupled model, leverages the flow-matching method for singing styles, pitches, and mel-spectrograms generation, allowing high-level control with fast and high-quality vocal generation. 2) AccompBand, a flow-based transformer model, incorporates the Aligned Vocal Encoder, using contrastive learning for alignment, and Band-MOE, selecting suitable experts for enhanced quality and control. This model allows for generating controllable, high-quality accompaniments perfectly aligned with vocals. 3) Two generation models, LyricBand for lyrics and MelodyBand for melodies, contribute to the comprehensive multi-task song generation system, allowing for extensive control based on multiple personalized prompts. Experimental results demonstrate that MultiBand performs better over baseline models across multiple tasks using objective and subjective metrics. Audio samples are available at https://multiband.github.io.
+      Song generation focuses on producing controllable high-quality songs based on various personalized prompts. 
+      However, existing methods struggle to generate high-quality vocals and accompaniments with effective style control and alignment. 
+      Additionally, they fall short in supporting various personalized tasks based on diverse prompts.
+      To address these challenges, we introduce MultiBand, the first multi-task song generation model for synthesizing high-quality, aligned songs with extensive control based on diverse personalized prompts. 
+      MultiBand comprises these primary modules: 
+      1) VocalBand, a decoupled model leveraging the flow-matching method for singing styles, pitches, and mel-spectrograms generation, allowing high-level control for fast and high-quality vocal generation; 
+      2) AccompBand, a flow-based transformer model, incorporates the Aligned Vocal Encoder, using contrastive learning for alignment, and Band-MOE, selecting suitable experts for enhanced quality and control. 
+      This model allows for generating controllable, high-quality accompaniments perfectly aligned with vocals; 
+      and 3) two generation models, LyricBand for lyrics and MelodyBand for melodies, contribute to the comprehensive multi-task song generation system, allowing for extensive control based on multiple personalized prompts.
+      Experimental results demonstrate that MultiBand performs better over baseline models across multiple tasks using objective and subjective metrics.
+      Audio samples are available at https://multiband.github.io.
     </p>
   </div>
 
@@ -61,15 +71,15 @@
     </div>
     <p>
       In this paper, we introduce MultiBand, the first multi-task song generation model for synthesizing high-quality, aligned songs with extensive control based on diverse personalized prompts.
-      Following the human perception that accompaniment complements vocal melody with complex harmonic and rhythmic structure \citep{zhiqing2024text}, we generate them separately.
-      To achieve fast and high-quality vocal generation with high-level control, we design a decoupled model VocalBand, predicting singing styles, pitches, and mel-spectrograms based on the flow-matching model.
-      Based on the complex nature of music, we introduce a flow-based transformer model AccompBand to generate high-fidelity, controllable, aligned accompaniments.
-      For proper alignment, we propose the Aligned Vocal Encoder using contrastive learning, encoding vocals to carry style, rhythm, and melody closely related to accompaniment.
+      Based on the understanding that accompaniment complements vocal by providing complex harmonic and rhythmic structure for better expression, we propose VocalBand and AccompBand.
+      To achieve fast and high-quality vocal generation with high-level control, we design a decoupled model VocalBand that predicts singing styles, pitches, and mel-spectrograms based on the flow-matching model.
+      For the complex nature of music and high-quality accompaniment generation with control and alignment, we introduce the flow-based transformer model AccompBand.
+      For alignment with vocals, we propose the Aligned Vocal Encoder using contrastive learning, ensuring vocal embedding carries style, rhythm, and melody closely related to accompaniment.
       We also design Band-MOE (Mixture of Experts), selecting suitable experts based on the time step, text prompts, and vocal embedding for enhanced quality and control. 
-      Additionally, we add two generation models, LyricBand for lyrics and MelodyBand for melodies, contributing to the comprehensive multi-task song generation system, like a versatile band. 
+      Additionally, we add two generation models, LyricBand for lyrics and MelodyBand for melodies, contributing to the comprehensive multi-task song generation system. 
     </p>
     <p>
-    Our experiments on a combination of open-source and web-crawled bilingual song datasets show MultiBand can generate high-quality songs based on various prompts, outperforming baseline models in multiple tasks, including melody and lyric generation, vocal generation, accompaniment and song generation, and other related tasks.
+    Our experiments on a combination of open-source and web-crawled bilingual song datasets show MultiBand can generate high-quality songs based on various prompts, outperforming baseline models in multiple tasks, including melody and lyric generation, singing voice synthesis, music and song generation, and other related tasks.
     </p>
     <div>
       <p><br /></p>
@@ -78,7 +88,7 @@
       </p>
 
       <p>
-      Note: For a fair comparison, all samples are resampled to 48kHZ and normalized to -23dB LUFS.        
+      Note: For fair comparison, all samples are resampled to 48kHZ and normalized to -23dB LUFS.        
       </p>
     </div>
     </div>
@@ -128,7 +138,7 @@
           <tr height=100px>
             <td style="text-align: center">不再看天上太阳透过云彩的光</td>
             <td style="text-align: center">The singing showcases a female vocalist singing melodically in a falsetto style, delivering a light and airy performance that enhances the romantic essence of the music.</td>
-            <td style="text-align: center">The music features acousitc guitars playing the melody, supported by a bass guitar in the background, creating an romantic atmosphere suitable for the opening theme of a teenage drama TV series.</td>
+            <td style="text-align: center">The music features acousitc guitars playing the melody, supported by a bass guitar in the background, creating an easygoing atmosphere suitable for the opening theme of a teenage drama TV series.</td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0001[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SG/0001[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
@@ -187,7 +197,7 @@
           <tr height=100px>
             <td style="text-align: center">我们都煎熬，我不要，流泪睡着</td>
             <td style="text-align: center">The singing showcases a male vocalist delivering an affectionate performance in falsetto, skillfully navigating the melody with emotional nuances that resonate deeply with the listener, capturing the essence of heartache.</td>
-            <td style="text-align: center">The slow pop background music is characterized by an acoustic guitar and piano playing the main tune, accompanied by a bass guitar in the background. The rhythmic foundation consists of a slow tempo acoustic drum beat, creating an emotional atmosphere.</td>
+            <td style="text-align: center">The slow pop background music is characterized by an acoustic guitar and piano playing the main tune, accompanied by a bass guitar in the background. The rhythmic foundation consists of a slow tempo acoustic drum beat, creating an emotional atmosphere suitable for a romantic comedy soundtrack.</td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0003[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0003[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0003[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
@@ -204,7 +214,7 @@
 
           <tr height=100px>
             <td style="text-align: center">要知道伤心总是难免的,在每一个梦醒时分,有些事情你现在不必问,有些人你</td>
-            <td style="text-align: center">This pop singing piece features a female vocalist singing melodically in the lead, exuding charm and energy. Her performance creates an danceable vibe that invites listener engagement.</td>
+            <td style="text-align: center">This pop singing piece features a female vocalist singing melodically in the lead, exuding charm and energy. Her performance creates an easygoing and danceable vibe that invites listener engagement.</td>
             <td style="text-align: center">The background music consists of a keyboard playing the main tune, supported by a bass guitar, with an electronic drum beat providing the rhythm. This creates a soft, passionate, and mellow atmosphere, suitable for the opening theme of a teenage drama TV series.</td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0005[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0005[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
@@ -214,7 +224,7 @@
           <tr height=100px>
             <td style="text-align: center">黑暗之中,沉默地探着你的手,是否我真的一无所有</td>
             <td style="text-align: center">This pop singing piece features a male vocalist singing melodically in the lead, imbued with sentimentality and warmth. His performance enhances the nostalgic quality of the lyrics, inviting listeners to reflect on their own experiences.</td>
-            <td style="text-align: center">The music is played by the keyboard, supported by a bass guitar in the background, with a acoustic drum beat providing the rhythm. This arrangement makes it suitable for a romantic soundtrack, particularly during scenes of nostalgia.</td>
+            <td style="text-align: center">The music is played by the keyboard, supported by a bass guitar in the background, with a acoustic drum beat providing the rhythm. This arrangement makes it suitable for a romantic comedy soundtrack, particularly during scenes of nostalgia.</td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0007[prompt].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0007[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SST/0007[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
@@ -347,7 +357,7 @@
     <h3 id="tablecontents" style="text-align: left;">Accompaniment-To-Song Generation<a id="A2S" /></h3>
     <p style="margin-top: 2em">
       In this section, we present generated samples of accompaniment-to-song generation.
-      We input GT accompaniment, and lyrics, music scores, singing styles as text prompt, to generate songs via VocalBand.
+      We input GT accompaniment, and lyrics, singing styles as text prompt, to generate songs via VocalBand.
     </p>
     <div class="container pt-3 table-responsive">
       <table class="table table-hover" id="lowresource_table1">
@@ -363,14 +373,6 @@
         <tbody>
 
           <tr height=100px>
-            <td style="text-align: center">怎么能轻易说要结束</td>
-            <td style="text-align: center">This pop singing piece features a female vocalist utilizing a mixed voice technique, infusing her performance with deep emotion. Her expressive delivery and skillful vocal techniques create a sad atmosphere.</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0002[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-          </tr>
-
-          <tr height=100px>
             <td style="text-align: center">看着他们我就湿了眼眶</td>
             <td style="text-align: center">This nostalgic pop singing features a male vocalist whose poignant delivery evokes a deep sense of longing. His emotive singing style, rich in warmth and vulnerability, invites listeners to reflect on their own memories, creating a hauntingly beautiful atmosphere throughout the track.</td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0003[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
@@ -379,11 +381,11 @@
           </tr>
 
           <tr height=100px>
-            <td style="text-align: center">一直到彩虹出现那天</td>
-            <td style="text-align: center">This singing showcases a male vocalist whose gentle, slow singing creates a soothing atmosphere. His soft tones and deliberate phrasing evoke a sense of calm.</td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0004[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0004[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
-            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0004[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center">怎么能轻易说要结束</td>
+            <td style="text-align: center">This pop singing piece features a female vocalist utilizing a mixed voice technique, infusing her performance with deep emotion. Her expressive delivery and skillful vocal techniques create a sad atmosphere.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0002[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
           </tr>
 
           <tr height=100px>
@@ -392,6 +394,14 @@
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0001[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0001[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+          </tr>
+
+          <tr height=100px>
+            <td style="text-align: center">一直到彩虹出现那天</td>
+            <td style="text-align: center">This singing showcases a male vocalist whose gentle, slow singing creates a soothing atmosphere. His soft tones and deliberate phrasing evoke a sense of calm.</td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0004[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0004[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
+            <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/A2S/0004[song].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
           </tr>
 
       </table>
@@ -406,7 +416,7 @@
     </p>
     
     <p style="margin-top: 2em">
-      In this part, we present generated samples of song generation (w/o lyrics).
+      In this subsection, we present generated samples of song generation (w/o lyrics).
       We input lyric prompts, music scores, singing and music styles as text prompts to generate songs via LyricBand, VocalBand, and AccompBand.
     </p>
     <div class="container pt-3 table-responsive">
@@ -427,7 +437,7 @@
           <tr height=100px>
             <td style="text-align: center">Generate a Chinese lyric about autumn and longing, capturing a melancholic and reflective mood, with elements of wind, dreams, loneliness, and heartache.</td>
             <td style="text-align: center">The recording showcases a female vocalist singing in a weak falsetto, delivering a sorrowful performance that evokes a sense of longing and emotional depth.</td>
-            <td style="text-align: center">The music features acoustic and electric guitars playing a melodic line, supported by a bass guitar in the background. A basic acoustic drum beat provides a steady rhythm.</td>
+            <td style="text-align: center">The music features acoustic and electric guitars playing a melodic line, supported by a bass guitar in the background. A basic acoustic drum beat provides a steady rhythm, creating an easygoing atmosphere suitable for a lighthearted piece.</td>
             <td style="text-align: center">风吹过，梦不见寂寞相伴，故秋声难负心伤</td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/0001[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/0001[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
@@ -447,7 +457,7 @@
     </div>
 
     <p style="margin-top: 2em">
-      In this part, we present generated samples of song generation (w/o scores).
+      In this subsection, we present generated samples of song generation (w/o notes).
       We input full lyrics, melody prompts, singing and music styles as text prompts to generate songs via MelodyBand, VocalBand, and AccompBand.
     </p>
     <div class="container pt-3 table-responsive">
@@ -476,8 +486,8 @@
 
           <tr height=100px>
             <td style="text-align: center">空着手，犹如你来的时候</td>
-            <td style="text-align: center">Please create a Chinese song for a high male singer with slightly sad emotions. The key should be F major, and the BPM should be between 130 and 150.</td>
-            <td style="text-align: center">This slow pop singing features a male vocalist delivering a smooth and romantic performance, skillfully navigating the sad melody, and evoking feelings of sadness.</td>
+            <td style="text-align: center">Please create a Chinese song for a high male singer with slightly happy emotion. The key should be F major, and the BPM should be between 130 and 150.</td>
+            <td style="text-align: center">This slow pop singing features a male vocalist delivering a smooth and romantic performance, skillfully navigating the sad melody, evoking feelings of sadness.</td>
             <td style="text-align: center">The background music is characterized by a gentle arrangement, with arpeggiated guitar chords providing a lush texture, supported by simple percussion and bass playing the root notes. The minimalistic instrumentation creates a sad atmosphere.</td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGN/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
@@ -487,7 +497,7 @@
     </div>
 
     <p style="margin-top: 2em">
-      In this part, we present generated samples of song generation (w/o contents).
+      In this subsection, we present generated samples of song generation (w/o contents).
       We input lyric prompts, melody prompts, singing and music styles as text prompts to generate songs via LyricBand, MelodyBand, VocalBand, and AccompBand.
     </p>
     <div class="container pt-3 table-responsive">
@@ -509,8 +519,8 @@
           <tr height=100px>
             <td style="text-align: center">Generate Chinese lyrics about lost dreams, conveying sadness and resignation, with themes of hope fading and introspection.</td>
             <td style="text-align: center">Please compose a song for a tenor singer performing in mixed voice, set at a BPM of 130 and in the key of A Major.</td>
-            <td style="text-align: center">This singing features a male vocalist delivering a breathy and introspective performance, capturing a sense of romantic through his nuanced delivery, which resonates deeply with the listener's emotions.</td>
-            <td style="text-align: center">The background music is defined by a rich synth pad melody, complemented by a strong bass sound that adds depth. The electronic drum beat provides a steady rhythm, creating an engaging and energetic atmosphere, making it suitable for dance clubs while conveying an underlying feeling of romantic.</td>
+            <td style="text-align: center">This singing features a male vocalist delivering a breathy and introspective performance, capturing a sense of despair and vulnerability through his nuanced delivery, which resonates deeply with the listener's emotions.</td>
+            <td style="text-align: center">The background music is defined by a rich synth pad melody, complemented by a strong bass sound that adds depth. The electronic drum beat provides a steady rhythm, creating an engaging and energetic atmosphere, making it suitable for dance clubs while conveying an underlying feeling of melancholy.</td>
             <td style="text-align: center">梦里那眼睛，苍穹的星无数</td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/0002[vocal].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
             <td style="text-align: center"><audio controls controlslist="nodownload" class="px-1"> <source src='data/SGC/0002[accomp].wav' type="audio/wav">Your browser does not support the audio element.</audio></td>
@@ -531,7 +541,7 @@
     </div>
 
     <p style="margin-top: 2em">
-      In this part, we present generated samples of song generation (w/o prompts).
+      In this subsection, we present generated samples of song generation (w/o prompts).
       We input lyric prompts, melody prompts, singing and music styles as text prompts to generate songs via LyricBand, MelodyBand, VocalBand, and AccompBand.
     </p>
     <div class="container pt-3 table-responsive">
