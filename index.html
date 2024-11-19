@@ -46,8 +46,16 @@
     </div>
     <p>
       <b>Abstract.</b>
-      Song generation focuses on producing controllable high-quality songs based on various personalized prompts. However, existing methods struggle to generate high-quality vocals and accompaniments with effective style control and proper alignment. Additionally, they fall short in supporting various personalized tasks based on diverse prompts. To address these challenges, we introduce MultiBand, the first multi-task song generation model for synthesizing high-quality, aligned songs with extensive control based on diverse personalized prompts. MultiBand comprises these primary models: 1) VocalBand, a decoupled model, leverages the flow-matching method for singing styles, pitches, and mel-spectrograms generation, allowing fast and high-quality vocal generation with high-level control. 2) AccompBand, a flow-based transformer model, incorporates the Aligned Vocal Encoder, using contrastive learning for alignment, and Band-MOE, selecting suitable experts for enhanced quality and control. This model allows for generating controllable, high-quality accompaniments perfectly aligned with vocals. 3) Two generation models, LyricBand for lyrics and MelodyBand for melodies, contribute to the comprehensive multi-task song generation system, allowing for extensive control based on multiple personalized prompts. Experimental results demonstrate that MultiBand performs better over baseline models across multiple tasks using objective and subjective metrics. Audio samples are available at https://multiband.github.io.
-    </p>
+      Song generation focuses on producing controllable high-quality songs based on various prompts. 
+      However, existing methods struggle to generate vocals and accompaniments with prompt-based control and proper alignment. 
+      Additionally, they fall short in supporting various tasks.
+      To address these challenges, we introduce MultiBand, the first multi-task song generation model for synthesizing high-quality, aligned songs with prompt-based control. 
+      MultiBand comprises these primary models:
+      1) VocalBand, a decoupled model, leverages the flow-matching method for singing styles, pitches, and mel-spectrograms generation, allowing fast, high-quality vocal generation with style control.
+      2) AccompBand, a flow-based transformer model, incorporates the Band-MOE, selecting suitable experts for enhanced quality, alignment, and control.
+      This model allows for generating controllable, high-quality accompaniments aligned with vocals.
+      3) Two generation models, LyricBand for lyrics and MelodyBand for melodies, contribute to the comprehensive multi-task song generation system, allowing for extensive control based on multiple prompts.
+      Experimental results demonstrate that MultiBand performs better over baseline models across multiple tasks using objective and subjective metrics.    </p>
   </div>
 
   <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
@@ -60,16 +68,13 @@
       <p><br /></p>
     </div>
     <p>
-      In this paper, we introduce MultiBand, the first multi-task song generation model for synthesizing high-quality, aligned songs with extensive control based on diverse personalized prompts.
-      Following the human perception that accompaniment complements vocal melody with complex harmonic and rhythmic structure, we generate them separately.
-      To achieve fast and high-quality vocal generation with high-level control, we design a decoupled model VocalBand, predicting singing styles, pitches, and mel-spectrograms based on the flow-matching model.
-      Based on the complex nature of music, we introduce a flow-based transformer model AccompBand to generate high-fidelity, controllable, aligned accompaniments.
-      For proper alignment, we propose the Aligned Vocal Encoder using contrastive learning, encoding vocals to carry style, rhythm, and melody closely related to accompaniment.
-      We also design Band-MOE (Mixture of Experts), selecting suitable experts for enhanced quality and control, considering the noise level, text prompts, and vocal embedding. 
-      Additionally, we add two generation models, LyricBand for lyrics and MelodyBand for melodies, contributing to the comprehensive multi-task song generation system, like a versatile band.
-    </p>
-    <p>
-    Our experiments on a combination of open-source and web-crawled bilingual song datasets show MultiBand can generate high-quality songs based on various prompts, outperforming baseline models in multiple tasks, including melody and lyric generation, singing voice synthesis, music and song generation, and other related tasks.
+      In this paper, we introduce MultiBand, the first multi-task song generation model for synthesizing high-quality, aligned songs with prompt-based control.
+    Following the human perception that accompaniment complements vocal melody with complex harmonic and rhythmic structure \citep{zhiqing2024text}, we generate them separately.
+    To achieve fast and high-quality vocal generation with control, we design a decoupled model VocalBand, predicting singing styles, pitches, and mel-spectrograms based on the flow-matching method.
+    Based on the complex nature of music, we introduce a flow-based transformer model AccompBand to generate high-fidelity, controllable, aligned accompaniments.
+    We design Band-MOE (Mixture of Experts), selecting suitable experts for enhanced quality, alignment, and control. 
+    Additionally, we add two generation models, LyricBand for lyrics and MelodyBand for melodies, contributing to the comprehensive multi-task song generation system. 
+    Our experiments on open-source and web-crawled bilingual song datasets show MultiBand can generate high-quality songs with control, outperforming baseline models in multiple song generation tasks.
     </p>
     <div>
       <p><br /></p>
